@@ -8,7 +8,7 @@ from spotipy.oauth2 import SpotifyOAuth
 # Spotify API 認証情報
 CLIENT_ID = 'f48dda32a0544428a6808ffc4a03e5ec'
 CLIENT_SECRET = '898a3fa1764d4471aa965cc8044ce02b'
-REDIRECT_URI = 'http://localhost:8888/callback'
+REDIRECT_URI = 'https://b2-flask-recommendation-app.onrender.com/callback'
 
 SCOPE = 'user-read-recently-played user-library-read user-top-read'
 
@@ -207,4 +207,5 @@ def logout():
     return redirect(url_for('login'))  # ログインページにリダイレクト
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8888)
+    port = int(os.getenv('PORT', 8888))  # PORT環境変数がない場合はデフォルトで8888を使用
+    app.run(debug=True, host='0.0.0.0', port=port)
